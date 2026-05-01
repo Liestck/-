@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Зоя и Антон — Вас пригласили на свадьбу!</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' font-size='48'%3E💍%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="assets/header_icon.png" alt="Иконка" class="logo-img" />
+    </div>
+
+    <div class="countdown" id="countdown">
+      <div class="countdown-numbers">
+        <div class="countdown-item">
+          <span class="countdown-number" id="days">00</span>
+          <span class="countdown-label">дней</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="hours">00</span>
+          <span class="countdown-label">часов</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="minutes">00</span>
+          <span class="countdown-label">минут</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="seconds">00</span>
+          <span class="countdown-label">секунд</span>
+        </div>
+      </div>
+      <div class="countdown-finished" style="display:none;">Сегодня свадьба!</div>
+    </div>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Меню">☰</button>
+    <nav class="menu" id="menu">
+      <a href="#home">Главная</a>
+      <a href="#moment">Момент настал</a>
+      <a href="#calendar-block">Календарь</a>
+      <a href="#ceremony">Место церемонии</a>
+      <a href="#location">Место проведения</a>
+      <a href="#schedule">Расписание</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <video autoplay muted loop playsinline>
+        <source src="assets/background.mp4" type="video/mp4" />
+      </video>
+      <div class="content">
+        <p class="invite-text">Приглашаем на свадьбу</p>
+        <div class="names">
+          <span>Зоя</span>
+          <span class="and-sign">&</span>
+          <span>Антон</span>
+          <div class="divider"></div>
+        </div>
+        <div class="date">06 / 06 / 26</div>
+      </div>
+    </section>
+
+    <!-- Момент настал -->
+    <section class="moment-section" id="moment">
+      <div class="moment-content">
+        <h2 class="moment-title">Этот момент настал!</h2>
+        <div class="moment-divider"></div>
+        <p class="moment-text">
+          Совсем скоро состоится день нашей свадьбы, и мы будем счастливы, если вы разделите с нами этот чудесный день.
+        </p>
+        <div class="moment-image">
+          <img src="assets/moment_photo.png" alt="Момент" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Свадьба состоится + календарь -->
+    <section class="calendar-section" id="calendar-block">
+      <div class="calendar-container">
+        <div class="calendar-header">
+          <span class="decorative-line"></span>
+          <h2 class="calendar-title">Свадьба состоится</h2>
+          <span class="decorative-line"></span>
+        </div>
+        <p class="calendar-month">ИЮНЬ</p>
+        <div class="calendar-grid">
+          <div class="day-name">ПН</div>
+          <div class="day-name">ВТ</div>
+          <div class="day-name">СР</div>
+          <div class="day-name">ЧТ</div>
+          <div class="day-name">ПТ</div>
+          <div class="day-name weekend">СБ</div>
+          <div class="day-name weekend">ВС</div>
+
+          <div class="day">1</div>
+          <div class="day">2</div>
+          <div class="day">3</div>
+          <div class="day">4</div>
+          <div class="day">5</div>
+          <div class="day weekend six">
+            6
+            <div class="ring-highlight">
+              <img src="assets/ring.png" alt="Кольцо" class="ring-img" />
+            </div>
+          </div>
+          <div class="day weekend">7</div>
+          <div class="day">8</div>
+          <div class="day">9</div>
+          <div class="day">10</div>
+          <div class="day">11</div>
+          <div class="day">12</div>
+          <div class="day weekend">13</div>
+          <div class="day weekend">14</div>
+          <div class="day">15</div>
+          <div class="day">16</div>
+          <div class="day">17</div>
+          <div class="day">18</div>
+          <div class="day">19</div>
+          <div class="day weekend">20</div>
+          <div class="day weekend">21</div>
+          <div class="day">22</div>
+          <div class="day">23</div>
+          <div class="day">24</div>
+          <div class="day">25</div>
+          <div class="day">26</div>
+          <div class="day weekend">27</div>
+          <div class="day weekend">28</div>
+          <div class="day">29</div>
+          <div class="day">30</div>
+        </div>
+      </div>
+      <div class="flowers_decor_left">
+        <img src="assets/flowers_back_left.png" alt="" class="flower-left-img" />
+      </div>
+      <div class="flowers_decor_right">
+        <img src="assets/flowers_back_right.png" alt="" class="flower-right-img" />
+      </div>
+    </section>
+
+    <!-- Место церемонии -->
+    <section class="ceremony-section" id="ceremony">
+      <div class="ceremony-container">
+        <div class="ceremony-header">
+          <span class="decorative-line"></span>
+          <h2 class="ceremony-title">Церемония</h2>
+          <span class="decorative-line"></span>
+        </div>
+        <p class="ceremony-text">
+          Наша церемония пройдет в ЗАГС Администрации Кагальницкого района Ростовской области (300 м. от Вокзала)
+        </p>
+        <div class="ceremony-image">
+          <img src="assets/zags.jpg" alt="ЗАГС" />
+        </div>
+        <a href="https://yandex.ru/maps/org/otdel_zags_administratsii_kagalnitskogo_rayona_rostovskoy_oblasti/1024490198/?display-text=%D0%97%D0%90%D0%93%D0%A1&l=pht&ll=40.149976%2C46.880560&mode=search&sctx=ZAAAAAgBEAAaKAoSCenwEMZPE0RAESHn%2FX%2BccEdAEhIJNiOD3EWYqj8RCyWTUzvDlD8iBgABAgMEBSgKOABA3YgGSAFiOnJlYXJyPXNjaGVtZV9Mb2NhbC9HZW91cHBlci9BZHZlcnRzL0N1c3RvbU1heGFkdi9FbmFibGVkPTFiOnJlYXJyPXNjaGVtZV9Mb2NhbC9HZW91cHBlci9BZHZlcnRzL0N1c3RvbU1heGFkdi9NYXhhZHY9MTViQHJlYXJyPXNjaGVtZV9Mb2NhbC9HZW91cHBlci9BZHZlcnRzL01heGFkdlRvcE1peC9NYXhhZHZGb3JNaXg9MTBqAnJ1nQHNzMw9oAEAqAEAvQH5K5GNwgEF1vXB6AOCAhsoKGNhdGVnb3J5X2lkOigxODQxMDcyNDIpKSmKAgkxODQxMDcyNDKSAgCaAgxkZXNrdG9wLW1hcHM%3D&sll=40.149976%2C46.880560&sspn=0.029833%2C0.011645&text=%7B%22text%22%3A%22%D0%97%D0%90%D0%93%D0%A1%22%2C%22what%22%3A%5B%7B%22attr_name%22%3A%22category_id%22%2C%22attr_values%22%3A%5B%22184107242%22%5D%7D%5D%7D&z=16.01"
+           target="_blank" rel="noopener noreferrer" class="ceremony-btn">Как добраться</a>
+      </div>
+    </section>
+
+    <!-- Место проведения (локация) -->
+    <section class="location-section" id="location">
+      <div class="location-container">
+        <div class="location-header">
+          <span class="decorative-line"></span>
+          <h2 class="location-title">Локация</h2>
+          <span class="decorative-line"></span>
+        </div>
+        <p class="location-text">
+          Наша свадьба пройдет в «Барин»<br>
+          Кольцовский пер., 80, станица Кагальницкая<br>
+          (2 км от Вокзала ст. Кагальницкая)
+        </p>
+        <div class="location-image">
+          <img src="assets/location.jpg" alt="Локация Барин" />
+        </div>
+        <p class="location-time">СБОР ГОСТЕЙ В 16:30</p>
+        <a href="https://yandex.ru/maps/org/barin/48772505644/?ll=40.156878%2C46.886186&z=13.8" target="_blank" rel="noopener noreferrer" class="location-btn">Как добраться</a>
+      </div>
+    </section>
+
+    <!-- Расписание -->
+    <section class="schedule-section" id="schedule">
+      <div class="schedule-container">
+        <div class="schedule-header">
+          <span class="decorative-line"></span>
+          <h2 class="schedule-title">Расписание</h2>
+          <span class="decorative-line"></span>
+        </div>
+        <div class="timeline-container">
+            <div class="timeline">
+                <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                <span class="timeline-time">12:20</span>
+                <span class="timeline-text">Сбор гостей на церемонию</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                <span class="timeline-time">12:30</span>
+                <span class="timeline-text">Церемония</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                <span class="timeline-time">16:30</span>
+                <span class="timeline-text">Сбор гостей на банкет</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                <span class="timeline-time">17:00</span>
+                <span class="timeline-text">Банкет</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                <span class="timeline-time">00:00</span>
+                <span class="timeline-text">Завершение банкета</span>
+                </div>
+            </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- НОВЫЙ БЛОК: КОНТАКТЫ -->
+    <section class="contacts-section" id="contacts">
+      <div class="contacts-container">
+        <div class="contacts-header">
+          <span class="decorative-line"></span>
+          <h2 class="contacts-title">Контакты</h2>
+          <span class="decorative-line"></span>
+        </div>
+
+        <p class="contacts-reminder">
+          Обязательно подтвердите присутствие до 30 мая!
+        </p>
+
+        <div class="social-links">
+          <a href="https://vk.com/zoya1313" target="_blank" rel="noopener noreferrer" class="social-icon">
+            <img src="assets/vk_logo.png" alt="VK" />
+          </a>
+          <a href="http://t.me/+79515170824" target="_blank" rel="noopener noreferrer" class="social-icon">
+            <img src="assets/tg_logo.png" alt="Telegram" />
+          </a>
+          <a href="https://max.ru/u/f9LHodD0cOL-URJQ7lB2F8H9Ei9tD-wLsQesmIOiGVwXZbeBb3olXQUYhXs" target="_blank" rel="noopener noreferrer" class="social-icon">
+            <img src="assets/max_logo.png" alt="Max" />
+          </a>
+          <a href="tel:+79515170824" class="social-icon">
+            <img src="assets/phone_logo.png" alt="Телефон" />
+          </a>
+        </div>
+
+        <p class="contacts-hint">Свяжитесь любым удобным способом</p>
+
+        <a href="tel:+79515170824" class="contacts-phone">+7 (951) 517-08-24</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>С любовью, Антон и Зоя ❤️💍</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

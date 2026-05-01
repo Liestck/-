@@ -1,0 +1,979 @@
+/* ===== Подключение локального шрифта ===== */
+@font-face {
+  font-family: 'Flores del Sol';
+  src: url('assets/Flores del Sol.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===== Базовые сбросы и переменные ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --gold: #d4af37;
+  --gold-light: #f3d779;
+  --cream: #fdfbf7;
+  --text-dark: #2c2c2c;
+  --overlay-dark: rgba(0, 0, 0, 0.35);
+  --overlay-gradient: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.55));
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-script: 'Flores del Sol', cursive;
+  --font-ampersand: 'Great Vibes', cursive;
+  --font-text: 'Montserrat', sans-serif;
+  --soft-red: #ee1443;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-text);
+  color: #fff;
+  background: #111;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== АНИМАЦИИ ПРИ ЗАГРУЗКЕ ===== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #fff;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  animation: slideDown 0.7s ease-out forwards;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+/* Очень тусклое свечение иконки */
+.logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-img {
+  height: 2.2rem;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 0 3px rgba(212, 175, 55, 0.2));
+  transition: filter 0.3s;
+}
+
+.logo-img:hover {
+  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.3));
+}
+
+/* ---------- Таймер ---------- */
+.countdown {
+  flex: 1;
+  text-align: center;
+  margin: 0 1rem;
+}
+
+.countdown-numbers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.4rem, 2vw, 1rem);
+  flex-wrap: wrap;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.2;
+}
+
+.countdown-number {
+  font-size: clamp(0.85rem, 2.8vw, 1.2rem);
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.countdown-label {
+  font-size: clamp(0.5rem, 1.4vw, 0.65rem);
+  color: var(--gold-light);
+  text-transform: lowercase;
+  margin-top: 0.1rem;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.countdown-finished {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--gold-light);
+  letter-spacing: 0.05em;
+}
+
+/* ---------- Кнопка меню ---------- */
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+  transition: opacity 0.2s;
+}
+
+.menu-btn:hover {
+  opacity: 0.7;
+}
+
+/* ---------- Меню ---------- */
+.menu {
+  position: absolute;
+  top: 72px;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 1rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  padding: 0.8rem 1.2rem;
+  display: none;
+  flex-direction: column;
+  gap: 0;
+  min-width: 170px;
+  color: #fff;
+}
+
+.menu.show {
+  display: flex;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.7rem 0.5rem;
+  display: block;
+  border-bottom: 1px solid var(--gold);
+  transition: border-color 0.25s ease, color 0.25s ease;
+  background: none;
+  border-radius: 0;
+}
+
+.menu a:last-child {
+  border-bottom: none;
+}
+
+.menu a:hover,
+.menu a:focus {
+  border-bottom-color: rgba(212, 175, 55, 0.4);
+  color: var(--gold-light);
+  background: none;
+  outline: none;
+}
+
+/* ===== Главный экран ===== */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  color: #fff;
+}
+
+.hero video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-gradient);
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 900px;
+  padding: 0 1.5rem;
+  animation: fadeInUp 1.2s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.invite-text {
+  font-family: var(--font-text);
+  font-weight: 300;
+  font-size: clamp(0.85rem, 2.2vw, 1.2rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+}
+
+/* Имена — Зоя и Антон шрифтом Flores del Sol */
+.names {
+  font-family: var(--font-script);
+  font-size: clamp(4.5rem, 16vw, 11rem);
+  line-height: 1;
+  font-weight: 400;
+  text-shadow: 0 5px 15px rgba(69, 70, 22, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1em;
+  animation: fadeInNames 1.4s ease-out forwards;
+}
+
+@keyframes fadeInNames {
+  from { opacity: 0.1; }
+  to { opacity: 1; }
+}
+
+.names span {
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.names:hover span:not(.and-sign) {
+  transform: scale(1.07);
+}
+
+.names span:nth-child(1) {
+  margin-right: clamp(0rem, 8vw, 10rem);
+}
+.names span:nth-child(3) {
+  margin-left: clamp(0rem, 10vw, 15rem);
+}
+
+/* Амперсанд — Great Vibes */
+.and-sign {
+  font-family: var(--font-ampersand) !important;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.names .divider {
+  width: 50%;
+  height: 2px;
+  margin: 1.4rem auto 0.6rem;
+  background: var(--gold);
+  border-radius: 1px;
+  box-shadow: 0 0 12px rgba(212,175,55,0.5);
+  align-self: center;
+  animation: expandDivider 1s ease-out 0.4s forwards;
+  transform-origin: center;
+  transform: scaleX(0);
+}
+
+@keyframes expandDivider {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.date {
+  font-family: var(--font-text);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 3.5vw, 1.8rem);
+  letter-spacing: 0.35em;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 0.5rem;
+}
+
+/* ===== БЛОК "МОМЕНТ НАСТАЛ" ===== */
+.moment-section {
+  background: #fff;
+  color: var(--text-dark);
+  text-align: center;
+  padding: 6rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.moment-content {
+  max-width: 800px;
+  width: 100%;
+}
+
+.moment-title {
+  font-family: var(--font-script);
+  font-size: clamp(2.8rem, 8vw, 5rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.moment-divider {
+  width: 50%;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin: 0 auto 2rem;
+  box-shadow: 0 0 8px rgba(212,175,55,0.3);
+}
+
+.moment-text {
+  font-family: var(--font-text);
+  font-weight: 300;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  line-height: 1.8;
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+}
+
+.moment-image {
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.moment-image:hover {
+  transform: scale(1.02);
+}
+
+.moment-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ===== БЛОК: СВАДЬБА СОСТОИТСЯ + КАЛЕНДАРЬ ===== */
+.calendar-section {
+  background: var(--cream);
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: var(--text-dark);
+  position: relative;
+}
+
+.calendar-container {
+  margin: 0 auto;
+  position: relative;
+}
+
+.flowers_decor_left {
+    height: 50%;
+    width: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.flowers_decor_right {
+    height: 50%;
+    width: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.flower-left-img, .flower-right-img  {
+    height: 100%;
+    width: auto;
+    display: block;
+}
+
+/* Заголовок с декоративными полосками */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding: 0 1.5rem;
+}
+
+.calendar-title {
+  font-family: var(--font-script);
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.decorative-line {
+  flex: 1;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 1px;
+  opacity: 0.6;
+  box-shadow: 0 0 4px rgba(212,175,55,0.3);
+}
+
+/* Месяц */
+.calendar-month {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: var(--text-dark);
+  margin-bottom: 2rem;
+}
+
+/* Календарная сетка */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  max-width: 550px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.day-name {
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  padding: 0.5rem 0;
+}
+
+.day-name.weekend {
+  color: var(--soft-red);
+}
+
+.day {
+  font-family: var(--font-text);
+  font-weight: 400;
+  font-size: 1.1rem;
+  padding: 0.8rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+.day.weekend {
+  color: var(--soft-red);
+}
+
+/* Кольцо вокруг особой даты */
+.six {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ring-highlight {
+  position: absolute;
+  top: -11%;
+  height: 100%;
+  left: 52.3%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring-img {
+  width: 140%;
+  height: auto;
+  display: block;
+}
+
+/* Адаптивность календаря */
+@media (max-width: 600px) {
+  .calendar-section {
+    padding: 4rem 1rem;
+  }
+  .calendar-title {
+    font-size: 2rem;
+  }
+  .calendar-month {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .day-name {
+    font-size: 0.75rem;
+  }
+  .day {
+    font-size: 0.95rem;
+    padding: 0.6rem 0;
+  }
+}
+
+/* ===== БЛОК: МЕСТО ЦЕРЕМОНИИ ===== */
+.ceremony-section {
+  background: #fff;
+  color: var(--text-dark);
+  text-align: center;
+  padding: 6rem 0 4rem;
+}
+
+.ceremony-container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.ceremony-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding: 0 1.5rem;
+}
+
+.ceremony-title {
+  font-family: var(--font-script);
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.ceremony-text {
+  font-family: var(--font-text);
+  font-weight: 300;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  line-height: 1.8;
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  padding: 0 1.5rem;
+}
+
+.ceremony-image {
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.ceremony-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: cover;
+}
+
+.ceremony-btn {
+  display: inline-block;
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  color: var(--text-dark);
+  text-decoration: none;
+  padding: 0.9rem 2.8rem;
+  border: 2px solid var(--gold);
+  background: transparent;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.ceremony-btn:hover {
+  background: var(--gold);
+  color: #fff;
+  border-color: var(--gold);
+}
+
+/* ===== БЛОК: МЕСТО ПРОВЕДЕНИЯ (ЛОКАЦИЯ) ===== */
+.location-section {
+  background: #fff;
+  color: var(--text-dark);
+  text-align: center;
+  padding: 6rem 0 4rem;
+}
+
+.location-container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.location-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding: 0 1.5rem;
+}
+
+.location-title {
+  font-family: var(--font-script);
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.location-text {
+  font-family: var(--font-text);
+  font-weight: 300;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  line-height: 1.8;
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  padding: 0 1.5rem;
+}
+
+.location-image {
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.location-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: cover;
+}
+
+.location-time {
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 1.4rem;
+  letter-spacing: 0.3em;
+  color: var(--text-dark);
+  margin-bottom: 2.5rem;
+  padding: 0 1.5rem;
+}
+
+.location-btn {
+  display: inline-block;
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  color: var(--text-dark);
+  text-decoration: none;
+  padding: 0.9rem 2.8rem;
+  border: 2px solid var(--gold);
+  background: transparent;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.location-btn:hover {
+  background: var(--gold);
+  color: #fff;
+  border-color: var(--gold);
+}
+
+/* ===== БЛОК: РАСПИСАНИЕ (ROAD MAP) ===== */
+.schedule-section {
+  background: var(--cream);
+  color: var(--text-dark);
+  text-align: center;
+  padding: 6rem 1.5rem;
+}
+
+.schedule-container {
+  margin: 0 auto;
+}
+
+.schedule-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.schedule-title {
+  font-family: var(--font-script);
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.timeline-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Дорожная карта */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+  text-align: left;
+  border-left: 2px solid var(--gold);
+  margin-left: 1rem;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.5rem;
+  padding-left: 2rem;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Маркер (точка) на временной линии */
+.timeline-marker {
+  position: absolute;
+  left: -2.5rem;
+  top: 0.3rem;
+  width: 1rem;
+  height: 1rem;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(212,175,55,0.5);
+  z-index: 1;
+}
+
+.timeline-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+
+.timeline-time {
+  font-family: var(--font-text);
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  min-width: 80px;
+}
+
+.timeline-text {
+  font-family: var(--font-text);
+  font-weight: 300;
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  letter-spacing: 0.02em;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 600px) {
+  .schedule-section {
+    padding: 4rem 1rem;
+  }
+  .timeline {
+    margin-left: 0.5rem;
+    padding-left: 1.5rem;
+  }
+  .timeline-item {
+    padding-left: 1.5rem;
+  }
+  .timeline-marker {
+    left: -1.9rem;
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+  .timeline-time {
+    font-size: 1.1rem;
+    min-width: 60px;
+  }
+  .timeline-text {
+    font-size: 1rem;
+  }
+}
+
+/* ===== НОВЫЙ БЛОК: КОНТАКТЫ ===== */
+.contacts-section {
+  background: #fff;
+  color: var(--text-dark);
+  text-align: center;
+  padding: 6rem 1.5rem;
+}
+
+.contacts-container {
+  margin: 0 auto;
+}
+
+.contacts-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.contacts-title {
+  font-family: var(--font-script);
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* Напоминание о подтверждении */
+.contacts-reminder {
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--soft-red);
+  margin-bottom: 3rem;
+  letter-spacing: 0.03em;
+}
+
+/* Иконки соцсетей */
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--cream);
+  transition: background 0.3s, transform 0.2s;
+}
+
+.social-icon:hover {
+  background: #eee8d5;
+  transform: scale(1.08);
+}
+
+.social-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* Подсказка */
+.contacts-hint {
+  font-family: var(--font-text);
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 1rem;
+}
+
+/* Кликабельный телефон */
+.contacts-phone {
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  color: var(--text-dark);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.contacts-phone:hover {
+  border-bottom-color: var(--gold);
+}
+
+/* ===== ФУТЕР ===== */
+.footer {
+  background: #1a1a1a;
+  color: #ddd;
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+}
+
+/* ===== Адаптивность (общее) ===== */
+@media (max-width: 600px) {
+  .header {
+    padding: 0.8rem 1rem;
+  }
+  .logo-img {
+    height: 1.8rem;
+  }
+  .menu {
+    top: 60px;
+    right: 0.5rem;
+    min-width: 150px;
+  }
+  .content {
+    padding: 0 1rem;
+  }
+  .invite-text {
+    margin-bottom: 2rem;
+  }
+  .countdown-label {
+    font-size: 0.5rem;
+  }
+  .names .divider {
+    width: 60%;
+  }
+  .names span:nth-child(1) {
+    margin-right: 0;
+  }
+  .names span:nth-child(3) {
+    margin-left: 0;
+  }
+  .moment-section {
+    padding: 4rem 1.2rem;
+  }
+  .moment-divider {
+    margin-bottom: 1.5rem;
+  }
+  .moment-text {
+    margin-bottom: 2rem;
+  }
+  .ceremony-section {
+    padding: 4rem 0 3rem;
+  }
+  .location-section {
+    padding: 4rem 0 3rem;
+  }
+  .location-time {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  .location-btn,
+  .ceremony-btn {
+    padding: 0.8rem 2rem;
+  }
+  .contacts-phone {
+    font-size: 1.4rem;
+  }
+}
