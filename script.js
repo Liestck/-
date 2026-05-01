@@ -41,14 +41,18 @@ setInterval(updateCountdown, 1000);
 // ===== АВТОЗАПУСК МУЗЫКИ =====
 const bgMusic = document.getElementById('bgMusic');
 
-// Пытаемся запустить сразу (может сработать, если пользователь уже взаимодействовал)
-bgMusic.play().catch(() => {
-  // Если заблокировано — ждём первого клика/касания
-  const playOnInteraction = () => {
-    bgMusic.play();
-    document.removeEventListener('click', playOnInteraction);
-    document.removeEventListener('touchstart', playOnInteraction);
-  };
-  document.addEventListener('click', playOnInteraction);
-  document.addEventListener('touchstart', playOnInteraction);
-});
+// Запускаем при первом клике в любом месте страницы
+document.addEventListener('click', function startMusic() {
+  bgMusic.muted = false;
+  bgMusic.volume = 0.5;
+  bgMusic.play().catch(e => console.log('Музыка не запустилась:', e));
+  document.removeEventListener('click', startMusic);
+}, { once: true });
+
+// Или при первом касании (мобильные)
+document.addEventListener('touchstart', function startMusicTouch() {
+  bgMusic.muted = false;
+  bgMusic.volume = 0.5;
+  bgMusic.play().catch(e => console.log('Музыка не запустилась:', e));
+  document.removeEventListener('touchstart', startMusicTouch);
+}, { once: true });
