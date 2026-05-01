@@ -365,9 +365,10 @@ body {
   border-radius: 20px;
   overflow: hidden;
   transition: transform 0.3s ease;
+  margin-bottom: 2rem;
 }
 
-.moment-image:hover {
+.moment-photos .moment-image:hover {
   transform: scale(1.02);
 }
 
@@ -375,6 +376,45 @@ body {
   display: block;
   width: 100%;
   height: auto;
+}
+
+
+
+/* Контейнер для второго фото с заголовком */
+.moment-photos {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+#photo {
+  width: 35%;
+}
+
+
+.moment-photos .moment-image {
+  margin-bottom: 0;
+}
+
+.photo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo {
+  max-width: 70%;
+}
+
+.moment-photos-title {
+  font-family: var(--font-script);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
 }
 
 /* ===== БЛОК: СВАДЬБА СОСТОИТСЯ + КАЛЕНДАРЬ ===== */
@@ -822,6 +862,7 @@ body {
 }
 
 .contacts-container {
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -852,6 +893,23 @@ body {
   letter-spacing: 0.03em;
 }
 
+/* Карточка для каждого человека */
+.contact-person {
+  background: var(--cream);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.contact-name {
+  font-family: var(--font-script);
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  margin-bottom: 1.2rem;
+  line-height: 1;
+}
+
 /* Иконки соцсетей */
 .social-links {
   display: flex;
@@ -859,7 +917,7 @@ body {
   align-items: center;
   gap: 1.5rem;
   flex-wrap: wrap;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .social-icon {
@@ -869,8 +927,9 @@ body {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: var(--cream);
+  background: #fff;
   transition: background 0.3s, transform 0.2s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
 }
 
 .social-icon:hover {
@@ -890,6 +949,7 @@ body {
   font-weight: 300;
   font-size: 0.9rem;
   color: #777;
+  margin-top: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -915,8 +975,56 @@ body {
   color: #ddd;
   text-align: center;
   padding: 2rem 1rem;
-  font-size: 0.95rem;
+  font-size: clamp(0.7rem, 2vw, 0.95rem);
   letter-spacing: 0.05em;
+}
+
+/* ===== АНИМИРОВАННЫЕ СТРЕЛКИ СВЕРХУ ВНИЗ (ЦИКЛ) ===== */
+.scroll-hint {
+  position: absolute;
+  bottom: 0rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  z-index: 3;
+  height: 50px;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.arrow {
+  display: block;
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.7);
+  transform: rotate(90deg);
+  line-height: 1;
+  animation: scrollDown 1.6s linear infinite;
+}
+
+/* Вторая стрелка стартует с задержкой — создаёт непрерывный поток */
+.arrow:last-child {
+  animation-delay: 0.8s;
+}
+
+@keyframes scrollDown {
+  0% {
+    transform: rotate(90deg) translateX(-30px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(90deg) translateX(40px);
+    opacity: 0;
+  }
 }
 
 /* ===== Адаптивность (общее) ===== */

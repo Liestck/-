@@ -37,3 +37,18 @@ function updateCountdown() {
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
+
+// ===== АВТОЗАПУСК МУЗЫКИ =====
+const bgMusic = document.getElementById('bgMusic');
+
+// Пытаемся запустить сразу (может сработать, если пользователь уже взаимодействовал)
+bgMusic.play().catch(() => {
+  // Если заблокировано — ждём первого клика/касания
+  const playOnInteraction = () => {
+    bgMusic.play();
+    document.removeEventListener('click', playOnInteraction);
+    document.removeEventListener('touchstart', playOnInteraction);
+  };
+  document.addEventListener('click', playOnInteraction);
+  document.addEventListener('touchstart', playOnInteraction);
+});
